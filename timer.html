@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online Timer - Countdown Timer for Study, Cooking, Workouts, and Exams</title>
+  <meta name="description" content="Use a simple online countdown timer for study sessions, cooking, workouts, presentations, and exams. Presets, fullscreen, and alerts included.">
+  <link rel="icon" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">ST</span>
+        <span>Simple Tools Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a class="active" href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="gpa-calculator.html">GPA</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="age-calculator.html">Age</a>
+        <a href="date-difference-calculator.html">Date Difference</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="tip-discount-calculator.html">Tip/Discount</a>
+        <a href="about.html">About</a>
+      </nav>
+      <button class="btn ghost theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" fill="currentColor"/>
+        </svg>
+        <span class="theme-label">Use dark theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <button class="btn ghost theme-toggle fullscreen-theme-toggle" type="button" aria-label="Toggle theme">
+      <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" fill="currentColor"/>
+      </svg>
+      <span class="theme-label">Use dark theme</span>
+    </button>
+    <section class="hero">
+      <h1>Free Online Timer</h1>
+      <p>Use this simple countdown timer for study sessions, cooking, workouts, presentations, and exams. Set a custom time or pick a preset and start instantly.</p>
+      <div class="btn-row">
+        <span class="badge">No sign-up • Works offline once loaded</span>
+        <a class="btn ghost" href="stopwatch.html">Need a stopwatch?</a>
+        <a class="btn ghost" href="pomodoro.html">Try Pomodoro</a>
+      </div>
+    </section>
+
+    <section class="tool-card">
+      <div class="timer-display" id="timer-display">00:05:00</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="timer-progress" style="width: 0%"></div>
+      </div>
+      <div class="controls">
+        <button class="btn primary" id="start-timer">Start</button>
+        <button class="btn" id="pause-timer">Pause</button>
+        <button class="btn ghost" id="reset-timer">Reset</button>
+        <button class="btn ghost" id="fullscreen-btn">Toggle fullscreen</button>
+      </div>
+      <div class="input-grid">
+        <div>
+          <label for="hours">Hours</label>
+          <input type="number" id="hours" min="0" value="0">
+        </div>
+        <div>
+          <label for="minutes">Minutes</label>
+          <input type="number" id="minutes" min="0" value="5">
+        </div>
+        <div>
+          <label for="seconds">Seconds</label>
+          <input type="number" id="seconds" min="0" value="0">
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn ghost preset" data-minutes="5">5 min</button>
+        <button class="btn ghost preset" data-minutes="10">10 min</button>
+        <button class="btn ghost preset" data-minutes="15">15 min</button>
+        <button class="btn ghost preset" data-minutes="25">25 min</button>
+        <button class="btn ghost preset" data-minutes="45">45 min</button>
+        <button class="btn ghost preset" data-minutes="60">1 hour</button>
+        <button class="btn ghost preset" data-minutes="75">1h 15m</button>
+      </div>
+      <div class="controls">
+        <label class="muted"><input type="checkbox" id="sound-toggle" checked> Play sound when finished</label>
+        <label class="muted"><input type="checkbox" id="vibrate-toggle"> Vibrate when finished</label>
+      </div>
+      <div class="inline-note muted">Keep this page open to hear the alert. Fullscreen mode enlarges the countdown for classrooms or gyms.</div>
+      <p class="description">Use this timer for study blocks, cooking, workouts, exams, or meetings. Quick presets help you start fast.</p>
+    </section>
+
+    <section class="tool-card">
+      <h2 class="section-title">Common uses for this timer</h2>
+      <p class="description">Set a clear countdown for focused work, timed activities, or quick reminders.</p>
+      <ul class="list-inline">
+        <li>Study blocks and Pomodoro sessions</li>
+        <li>Cooking and baking steps</li>
+        <li>Workouts and interval training</li>
+        <li>Presentations and practice runs</li>
+      </ul>
+
+      <h2 class="section-title">FAQ</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Can I use this timer for exams?</h3>
+          <p>Yes. Set the exact duration and use fullscreen for a clear, distraction-free display.</p>
+        </div>
+        <div class="card">
+          <h3>Will the timer keep running if I switch tabs?</h3>
+          <p>It keeps counting down. Keep the tab open to ensure you hear the alert.</p>
+        </div>
+        <div class="card">
+          <h3>Can I use it for study and Pomodoro sessions?</h3>
+          <p>Yes. Use presets for quick starts or try the Pomodoro timer for automatic cycles.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Related tools</h2>
+      <ul class="list-inline">
+        <li><a href="stopwatch.html">Try the stopwatch</a></li>
+        <li><a href="pomodoro.html">Use the pomodoro timer</a></li>
+        <li><a href="date-difference-calculator.html">Calculate days between dates</a></li>
+      </ul>
+
+      <h2 class="section-title">About online timers</h2>
+      <p class="description">Online timers are quick countdowns that run in your browser without downloads. This tool keeps things simple so you can focus on the task at hand.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="tip-discount-calculator.html">Tip & Discount</a>
+        <a href="about.html">Privacy</a>
+      </div>
+      <div class="muted small">© <span class="year"></span> Simple Tools Hub. Timer page.</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/timer.js"></script>
+</body>
+</html>

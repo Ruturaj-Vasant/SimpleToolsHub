@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip and Discount Calculator - Calculate Tips, Savings, and Final Price</title>
+  <meta name="description" content="Calculate restaurant tips, split bills, and find final prices after discounts. Fast, simple, and accurate.">
+  <link rel="icon" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">ST</span>
+        <span>Simple Tools Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="gpa-calculator.html">GPA</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="age-calculator.html">Age</a>
+        <a href="date-difference-calculator.html">Date Difference</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a class="active" href="tip-discount-calculator.html">Tip/Discount</a>
+        <a href="about.html">About</a>
+      </nav>
+      <button class="btn ghost theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" fill="currentColor"/>
+        </svg>
+        <span class="theme-label">Use dark theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Tip and Discount Calculator</h1>
+      <p>Calculate restaurant tips, shopping discounts, and split bills quickly. Useful for dining out, budgeting, and sales.</p>
+      <div class="btn-row">
+        <a class="btn ghost" href="percentage-calculator.html">Percentage calculator</a>
+        <a class="btn ghost" href="unit-converter.html">Unit converter</a>
+      </div>
+    </section>
+
+    <section class="tool-card">
+      <div class="grid">
+        <div class="card">
+          <h3>Tip calculator</h3>
+          <div class="input-grid">
+            <div>
+              <label for="bill-amount">Bill amount</label>
+              <input type="number" id="bill-amount" value="50" step="0.01">
+            </div>
+            <div>
+              <label for="tip-percent">Tip %</label>
+              <input type="number" id="tip-percent" value="15" step="1">
+            </div>
+            <div>
+              <label for="split-count">Split between</label>
+              <input type="number" id="split-count" value="2" min="1">
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn ghost tip-preset" data-tip="10">10%</button>
+            <button class="btn ghost tip-preset" data-tip="15">15%</button>
+            <button class="btn ghost tip-preset" data-tip="18">18%</button>
+            <button class="btn ghost tip-preset" data-tip="20">20%</button>
+          </div>
+          <button class="btn primary" id="calc-tip">Calculate tip</button>
+          <div class="inline-note">
+            <div>Tip amount: <strong id="tip-amount">$7.50</strong></div>
+            <div>Total with tip: <strong id="tip-total">$57.50</strong></div>
+            <div>Per person: <strong id="tip-per-person">$28.75</strong></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Discount calculator</h3>
+          <div class="input-grid">
+            <div>
+              <label for="original-price">Original price</label>
+              <input type="number" id="original-price" value="120" step="0.01">
+            </div>
+            <div>
+              <label for="discount-percent">Discount %</label>
+              <input type="number" id="discount-percent" value="25" step="0.1">
+            </div>
+          </div>
+          <button class="btn primary" id="calc-discount">Calculate discount</button>
+          <div class="inline-note">
+            <div>Savings: <strong id="savings">$30.00</strong></div>
+            <div>Final price: <strong id="final-price">$90.00</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-card">
+      <h2 class="section-title">Common situations</h2>
+      <ul class="list-inline">
+        <li>Restaurant tips</li>
+        <li>Splitting bills</li>
+        <li>Sale prices</li>
+        <li>Budgeting purchases</li>
+      </ul>
+
+      <h2 class="section-title">FAQ</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>How do I split a bill?</h3>
+          <p>Enter the number of people in “Split between” to calculate per-person totals.</p>
+        </div>
+        <div class="card">
+          <h3>Does this include tax?</h3>
+          <p>No. If you want to include tax, add it to the bill amount before calculating.</p>
+        </div>
+        <div class="card">
+          <h3>Can I calculate discounts too?</h3>
+          <p>Yes. Use the discount section to see savings and final price.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Related tools</h2>
+      <ul class="list-inline">
+        <li><a href="percentage-calculator.html">Use the percentage calculator</a></li>
+        <li><a href="unit-converter.html">Try the unit converter</a></li>
+      </ul>
+
+      <h2 class="section-title">About this tool</h2>
+      <p class="description">This page combines quick tip and discount calculations in one place so you can check totals fast.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="tip-discount-calculator.html">Tip & Discount</a>
+        <a href="about.html">Privacy</a>
+      </div>
+      <div class="muted small">© <span class="year"></span> Simple Tools Hub. Tip & discount page.</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/tip-discount.js"></script>
+</body>
+</html>

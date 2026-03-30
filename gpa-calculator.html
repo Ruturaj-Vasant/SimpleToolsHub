@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA Calculator - Free Online GPA and Grade Point Calculator</title>
+  <meta name="description" content="Estimate your GPA from courses, credits, and letter grades. Add or remove classes and calculate grade points instantly.">
+  <link rel="icon" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">ST</span>
+        <span>Simple Tools Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a class="active" href="gpa-calculator.html">GPA</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="age-calculator.html">Age</a>
+        <a href="date-difference-calculator.html">Date Difference</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="tip-discount-calculator.html">Tip/Discount</a>
+        <a href="about.html">About</a>
+      </nav>
+      <button class="btn ghost theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" fill="currentColor"/>
+        </svg>
+        <span class="theme-label">Use dark theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>GPA Calculator</h1>
+      <p>Estimate your GPA from course credits and letter grades. Add classes, pick grades, and see the result instantly.</p>
+      <div class="btn-row">
+        <span class="badge">No sign-up • Works offline once loaded</span>
+        <a class="btn ghost" href="percentage-calculator.html">Check percentages</a>
+      </div>
+    </section>
+
+    <section class="tool-card">
+      <div class="highlight-number" id="gpa-output">0.00</div>
+      <p class="muted">GPA is weighted by course credits. Use the grade dropdown to pick standard letter grades.</p>
+      <div class="btn-row">
+        <button class="btn primary" id="add-course">Add course</button>
+        <button class="btn" id="calculate-gpa">Calculate GPA</button>
+        <button class="btn ghost" id="reset-courses">Reset</button>
+      </div>
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Credits</th>
+              <th>Grade</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="courses-body"></tbody>
+        </table>
+      </div>
+      <div class="inline-note muted">Grade scale: A=4.0, A-=3.7, B+=3.3, B=3.0, B-=2.7, C+=2.3, C=2.0, C-=1.7, D=1.0, F=0.0.</div>
+    </section>
+
+    <section class="tool-card">
+      <h2 class="section-title">How GPA is usually calculated</h2>
+      <p class="description">GPA is a weighted average of grade points by course credits. Each grade maps to a point value, then total points are divided by total credits.</p>
+
+      <h2 class="section-title">FAQ</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Can I add more courses?</h3>
+          <p>Yes. Use “Add course” to include as many classes as you need.</p>
+        </div>
+        <div class="card">
+          <h3>Does this support weighted or honors GPA?</h3>
+          <p>This calculator uses a standard 4.0 scale. Weighted scales can be estimated by adjusting grade points manually.</p>
+        </div>
+        <div class="card">
+          <h3>Will my entries be saved?</h3>
+          <p>Your rows are saved locally in your browser so they stay after refresh.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Related tools</h2>
+      <ul class="list-inline">
+        <li><a href="percentage-calculator.html">Use the percentage calculator</a></li>
+        <li><a href="pomodoro.html">Try the pomodoro timer</a></li>
+      </ul>
+
+      <h2 class="section-title">About this tool</h2>
+      <p class="description">Use this GPA calculator for quick estimates. Always check your school’s official scale for final results.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="tip-discount-calculator.html">Tip & Discount</a>
+        <a href="about.html">Privacy</a>
+      </div>
+      <div class="muted small">© <span class="year"></span> Simple Tools Hub. GPA calculator page.</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/gpa.js"></script>
+</body>
+</html>

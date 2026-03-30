@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online Stopwatch - Simple Stopwatch with Lap Timing</title>
+  <meta name="description" content="Use a simple online stopwatch with lap timing for workouts, runs, classrooms, and experiments. Start instantly with no sign-up.">
+  <link rel="icon" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">ST</span>
+        <span>Simple Tools Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="timer.html">Timer</a>
+        <a class="active" href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="gpa-calculator.html">GPA</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="age-calculator.html">Age</a>
+        <a href="date-difference-calculator.html">Date Difference</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="tip-discount-calculator.html">Tip/Discount</a>
+        <a href="about.html">About</a>
+      </nav>
+      <button class="btn ghost theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" fill="currentColor"/>
+        </svg>
+        <span class="theme-label">Use dark theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <button class="btn ghost theme-toggle fullscreen-theme-toggle" type="button" aria-label="Toggle theme">
+      <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" fill="currentColor"/>
+      </svg>
+      <span class="theme-label">Use dark theme</span>
+    </button>
+    <section class="hero">
+      <h1>Free Online Stopwatch</h1>
+      <p>Use this stopwatch for workouts, runs, classroom timing, experiments, and productivity tracking. Start, pause, and record laps instantly.</p>
+      <div class="btn-row">
+        <span class="badge">Runs in the browser • No downloads</span>
+        <a class="btn ghost" href="timer.html">Need a countdown?</a>
+        <a class="btn ghost" href="pomodoro.html">Try Pomodoro</a>
+      </div>
+    </section>
+
+    <section class="tool-card">
+      <div class="stopwatch-display" id="stopwatch-display">00:00.00</div>
+      <div class="controls">
+        <button class="btn primary" id="start-stopwatch">Start</button>
+        <button class="btn" id="lap-btn">Lap</button>
+        <button class="btn ghost" id="reset-stopwatch">Reset</button>
+        <button class="btn ghost" id="copy-laps">Copy laps</button>
+        <button class="btn ghost" id="fullscreen-stopwatch">Toggle fullscreen</button>
+      </div>
+      <div class="inline-note muted">Lap times capture the current elapsed time plus split duration. Copy all laps for logs or training notes.</div>
+      <div class="card">
+        <h3>Laps</h3>
+        <ol id="laps-list" class="muted" aria-live="polite"></ol>
+      </div>
+    </section>
+
+    <section class="tool-card">
+      <h2 class="section-title">When to use a stopwatch vs a timer</h2>
+      <p class="description">Use a stopwatch when you want to measure how long something takes. Use a timer when you need a countdown to a specific end time.</p>
+
+      <h2 class="section-title">FAQ</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>How do lap times work?</h3>
+          <p>Each lap records the total elapsed time plus the split since your previous lap.</p>
+        </div>
+        <div class="card">
+          <h3>Can I use this on mobile?</h3>
+          <p>Yes. The layout is mobile-friendly and works in any modern browser.</p>
+        </div>
+        <div class="card">
+          <h3>Will it keep running if my screen locks?</h3>
+          <p>Some devices pause background timers. Keep the screen awake for the most accurate timing.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Related tools</h2>
+      <ul class="list-inline">
+        <li><a href="timer.html">Use the countdown timer</a></li>
+        <li><a href="pomodoro.html">Try the pomodoro timer</a></li>
+      </ul>
+
+      <h2 class="section-title">About this stopwatch</h2>
+      <p class="description">This stopwatch runs entirely in your browser with no sign-up. Use it for quick timing whenever you need a reliable start/stop clock.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="tip-discount-calculator.html">Tip & Discount</a>
+        <a href="about.html">Privacy</a>
+      </div>
+      <div class="muted small">© <span class="year"></span> Simple Tools Hub. Stopwatch page.</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/stopwatch.js"></script>
+</body>
+</html>

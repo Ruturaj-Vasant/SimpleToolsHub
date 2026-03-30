@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Timer Online - Focus Timer for Study and Deep Work</title>
+  <meta name="description" content="Use the Pomodoro timer for focused work sessions with short breaks. Start with 25/5 or 50/10 presets or customize your own cycle.">
+  <link rel="icon" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">ST</span>
+        <span>Simple Tools Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a class="active" href="pomodoro.html">Pomodoro</a>
+        <a href="gpa-calculator.html">GPA</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="age-calculator.html">Age</a>
+        <a href="date-difference-calculator.html">Date Difference</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="tip-discount-calculator.html">Tip/Discount</a>
+        <a href="about.html">About</a>
+      </nav>
+      <button class="btn ghost theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" fill="currentColor"/>
+        </svg>
+        <span class="theme-label">Use dark theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <button class="btn ghost theme-toggle fullscreen-theme-toggle" type="button" aria-label="Toggle theme">
+      <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" fill="currentColor"/>
+      </svg>
+      <span class="theme-label">Use dark theme</span>
+    </button>
+    <section class="hero">
+      <h1>Pomodoro Timer Online</h1>
+      <p>The Pomodoro technique uses focused work blocks followed by short breaks. Start a session and keep your attention on one task at a time.</p>
+      <div class="btn-row">
+        <span class="badge">Default 25/5 • Switchable to 50/10</span>
+        <a class="btn ghost" href="timer.html">Need a simple timer?</a>
+        <a class="btn ghost" href="stopwatch.html">Open stopwatch</a>
+      </div>
+    </section>
+
+    <section class="tool-card">
+      <div class="pomodoro-display" id="pomodoro-display">25:00</div>
+      <div class="controls">
+        <button class="btn primary" id="start-pomodoro">Start</button>
+        <button class="btn" id="pause-pomodoro">Pause</button>
+        <button class="btn ghost" id="reset-pomodoro">Reset</button>
+        <button class="btn ghost" id="fullscreen-pomodoro">Toggle fullscreen</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi">
+          <strong id="session-label">Work session</strong>
+          <span class="muted">Current mode</span>
+        </div>
+        <div class="kpi">
+          <strong id="session-count">0</strong>
+          <span class="muted">Completed focus blocks</span>
+        </div>
+      </div>
+      <div class="controls">
+        <label class="muted"><input type="checkbox" id="pomo-sound-toggle" checked> Sound alert</label>
+        <label class="muted"><input type="checkbox" id="pomo-vibrate-toggle"> Vibrate alert</label>
+      </div>
+      <div class="btn-row">
+        <button class="btn ghost pom-preset" data-work="25" data-break="5">25 / 5</button>
+        <button class="btn ghost pom-preset" data-work="50" data-break="10">50 / 10</button>
+      </div>
+      <div class="input-grid">
+        <div>
+          <label for="work-minutes">Work minutes</label>
+          <input type="number" id="work-minutes" min="5" value="25">
+        </div>
+        <div>
+          <label for="break-minutes">Break minutes</label>
+          <input type="number" id="break-minutes" min="3" value="5">
+        </div>
+      </div>
+      <div class="inline-note muted">Tip: keep the page in a pinned tab. Title updates while running so you can glance at remaining time.</div>
+    </section>
+
+    <section class="tool-card">
+      <h2 class="section-title">What is the Pomodoro technique?</h2>
+      <p class="description">It’s a simple method: work in short, timed intervals, then take a short break. The rhythm helps you stay focused and avoid burnout.</p>
+
+      <h2 class="section-title">When Pomodoro works best</h2>
+      <ul class="list-inline">
+        <li>Studying for exams</li>
+        <li>Writing or coding sprints</li>
+        <li>Deep work sessions</li>
+        <li>Breaking large tasks into chunks</li>
+      </ul>
+
+      <h2 class="section-title">FAQ</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Can I customize work and break lengths?</h3>
+          <p>Yes. Set your own work and break minutes before starting.</p>
+        </div>
+        <div class="card">
+          <h3>Do sessions keep counting if I switch tabs?</h3>
+          <p>Yes, the timer keeps counting down. Keep the tab open to hear alerts.</p>
+        </div>
+        <div class="card">
+          <h3>Is 25/5 required?</h3>
+          <p>No. Use 25/5, 50/10, or any custom durations that suit your focus style.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Related tools</h2>
+      <ul class="list-inline">
+        <li><a href="timer.html">Use the countdown timer</a></li>
+        <li><a href="stopwatch.html">Try the stopwatch</a></li>
+      </ul>
+
+      <h2 class="section-title">About this tool</h2>
+      <p class="description">This Pomodoro timer runs in your browser with no sign-up. Use it for quick focus sessions whenever you need a clean, simple workflow.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="tip-discount-calculator.html">Tip & Discount</a>
+        <a href="about.html">Privacy</a>
+      </div>
+      <div class="muted small">© <span class="year"></span> Simple Tools Hub. Pomodoro page.</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/pomodoro.js"></script>
+</body>
+</html>

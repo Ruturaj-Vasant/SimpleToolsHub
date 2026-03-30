@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator - Calculate Exact Age Online</title>
+  <meta name="description" content="Calculate exact age in years, months, and days based on date of birth. Includes next birthday countdown and custom current date.">
+  <link rel="icon" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">ST</span>
+        <span>Simple Tools Hub</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="gpa-calculator.html">GPA</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a class="active" href="age-calculator.html">Age</a>
+        <a href="date-difference-calculator.html">Date Difference</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="tip-discount-calculator.html">Tip/Discount</a>
+        <a href="about.html">About</a>
+      </nav>
+      <button class="btn ghost theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" fill="currentColor"/>
+        </svg>
+        <span class="theme-label">Use dark theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Age Calculator</h1>
+      <p>Calculate your exact age based on your date of birth and a chosen current date, plus a countdown to your next birthday.</p>
+      <div class="btn-row">
+        <a class="btn ghost" href="date-difference-calculator.html">Date difference</a>
+      </div>
+    </section>
+
+    <section class="tool-card">
+      <div class="input-grid">
+        <div>
+          <label for="dob">Date of birth</label>
+          <input type="date" id="dob">
+        </div>
+        <div>
+          <label for="current-date">Current date</label>
+          <input type="date" id="current-date">
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" id="calc-age">Calculate age</button>
+        <button class="btn ghost" id="reset-age">Reset</button>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Age</h3>
+          <p id="age-result" class="highlight-number">0 years</p>
+        </div>
+        <div class="card">
+          <h3>Next birthday</h3>
+          <p id="birthday-result" class="muted">Enter a birth date to see the countdown.</p>
+        </div>
+      </div>
+      <div class="inline-note muted">Age uses calendar months/days for accuracy. Current date defaults to today but can be changed for planning.</div>
+    </section>
+
+    <section class="tool-card">
+      <h2 class="section-title">What this calculator shows</h2>
+      <p class="description">See your age in years, months, and days, plus how many days remain until your next birthday.</p>
+
+      <h2 class="section-title">FAQ</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Does this handle leap years?</h3>
+          <p>Yes. The calculation uses real calendar dates, including leap years and varying month lengths.</p>
+        </div>
+        <div class="card">
+          <h3>Can I change the current date?</h3>
+          <p>Yes. Set a custom current date to calculate ages for past or future dates.</p>
+        </div>
+        <div class="card">
+          <h3>Is my birth date stored?</h3>
+          <p>No. All calculations happen in your browser and are not saved.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Related tools</h2>
+      <ul class="list-inline">
+        <li><a href="date-difference-calculator.html">Compare two dates</a></li>
+        <li><a href="timer.html">Set a quick timer</a></li>
+      </ul>
+
+      <h2 class="section-title">About this tool</h2>
+      <p class="description">Use the age calculator for planning, forms, or personal milestones. It’s designed for fast, accurate results.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="timer.html">Timer</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="unit-converter.html">Unit Converter</a>
+        <a href="percentage-calculator.html">Percentage</a>
+        <a href="tip-discount-calculator.html">Tip & Discount</a>
+        <a href="about.html">Privacy</a>
+      </div>
+      <div class="muted small">© <span class="year"></span> Simple Tools Hub. Age calculator page.</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/age.js"></script>
+</body>
+</html>
