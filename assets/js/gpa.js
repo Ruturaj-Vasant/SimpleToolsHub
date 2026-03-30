@@ -105,8 +105,21 @@ function loadCourses() {
 addCourseBtn.addEventListener('click', () => {
   createCourseRow('', 3, 'A');
   calculateGPA();
+  if (window.trackEvent) {
+    window.trackEvent('gpa_add_course', { courses_count: coursesBody.children.length });
+  }
 });
-calcBtn.addEventListener('click', calculateGPA);
-resetBtn.addEventListener('click', resetCourses);
+calcBtn.addEventListener('click', () => {
+  calculateGPA();
+  if (window.trackEvent) {
+    window.trackEvent('gpa_calculate', { courses_count: coursesBody.children.length });
+  }
+});
+resetBtn.addEventListener('click', () => {
+  resetCourses();
+  if (window.trackEvent) {
+    window.trackEvent('gpa_reset');
+  }
+});
 
 loadCourses();

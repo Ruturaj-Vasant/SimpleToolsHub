@@ -1,5 +1,13 @@
 const THEME_KEY = 'sth-theme';
 
+function trackEvent(name, params = {}) {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', name, params);
+  }
+}
+
+window.trackEvent = trackEvent;
+
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   document.documentElement.classList.toggle('dark-theme', theme === 'dark');
@@ -44,6 +52,7 @@ function initThemeToggle(startTheme) {
     const next = current === 'dark' ? 'light' : 'dark';
     applyTheme(next);
     setLabel(next);
+    trackEvent('theme_toggle', { theme: next });
   };
   buttons.forEach(button => button.addEventListener('click', handleClick));
   if (window.matchMedia) {

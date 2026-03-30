@@ -37,12 +37,18 @@ function toggleStart() {
     timerId = setInterval(tick, 50);
     running = true;
     startBtn.textContent = 'Pause';
+    if (window.trackEvent) {
+      window.trackEvent('stopwatch_start', { elapsed_ms: elapsed });
+    }
   } else {
     elapsed = Date.now() - startTime;
     clearInterval(timerId);
     running = false;
     startBtn.textContent = 'Resume';
     render();
+    if (window.trackEvent) {
+      window.trackEvent('stopwatch_pause', { elapsed_ms: elapsed });
+    }
   }
 }
 
@@ -55,6 +61,9 @@ function reset() {
   lapsList.innerHTML = '';
   startBtn.textContent = 'Start';
   render();
+  if (window.trackEvent) {
+    window.trackEvent('stopwatch_reset');
+  }
 }
 
 function addLap() {
@@ -66,6 +75,13 @@ function addLap() {
     split: current - lastLapTime,
   });
   renderLaps();
+  if (window.trackEvent) {
+    window.trackEvent('stopwatch_lap', {
+      lap_index: laps.length,
+      elapsed_ms: current,
+      split_ms: current - lastLapTime,
+    });
+  }
 }
 
 function renderLaps() {
@@ -84,6 +100,9 @@ async function copyLapsToClipboard() {
     await navigator.clipboard.writeText(text);
     copyBtn.textContent = 'Copied!';
     setTimeout(() => (copyBtn.textContent = 'Copy laps'), 1600);
+    if (window.trackEvent) {
+      window.trackEvent('stopwatch_copy_laps', { laps_count: laps.length });
+    }
   } catch (err) {
     copyBtn.textContent = 'Copy not available';
     setTimeout(() => (copyBtn.textContent = 'Copy laps'), 1600);
@@ -106,4 +125,10 @@ fullscreenBtn.addEventListener('click', () => {
 
 document.addEventListener('fullscreenchange', () => {
   document.body.classList.toggle('fullscreen-mode', Boolean(document.fullscreenElement));
+  if (window.trackEvent) {
+    window.trackEvent('fullscreen_toggle', {
+      tool: 'stopwatch',
+      state: document.fullscreenElement ? 'enter' : 'exit',
+    });
+  }
 });

@@ -17,17 +17,23 @@ function daysInMonth(year, monthIndex) {
   return new Date(year, monthIndex + 1, 0).getDate();
 }
 
-function calculateAge() {
+function calculateAge(source) {
   const birthDate = toDate(dobInput.value);
   const currentDate = toDate(currentInput.value) || new Date();
   if (!birthDate || isNaN(birthDate.getTime())) {
     ageResult.textContent = 'Enter a valid birth date';
     birthdayResult.textContent = '';
+    if (source && window.trackEvent) {
+      window.trackEvent('age_calculate', { source, valid: false });
+    }
     return;
   }
   if (birthDate > currentDate) {
     ageResult.textContent = 'Birth date is in the future';
     birthdayResult.textContent = '';
+    if (source && window.trackEvent) {
+      window.trackEvent('age_calculate', { source, valid: false });
+    }
     return;
   }
   let years = currentDate.getFullYear() - birthDate.getFullYear();
@@ -63,6 +69,9 @@ function calculateAge() {
   const diffMs = nextBirthday - currentDate;
   const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
   birthdayResult.textContent = `${diffDays} day(s) until next birthday (${formatISO(nextBirthday)})`;
+  if (source && window.trackEvent) {
+    window.trackEvent('age_calculate', { source, valid: true });
+  }
 }
 
 function resetAge() {
@@ -74,7 +83,12 @@ function resetAge() {
 
 resetAge();
 
-calcAgeBtn.addEventListener('click', calculateAge);
-resetAgeBtn.addEventListener('click', resetAge);
-dobInput.addEventListener('change', calculateAge);
-currentInput.addEventListener('change', calculateAge);
+calcAgeBtn.addEventListener('click', () => calculateAge('button'));
+resetAgeBtn.addEventListener('click', () => {
+  resetAge();
+  if (window.trackEvent) {
+    window.trackEvent('age_reset');
+  }
+});
+dobInput.addEventListener('change', () => calculateAge('input'));
+currentInput.addEventListener('change', () => calculateAge('input'));

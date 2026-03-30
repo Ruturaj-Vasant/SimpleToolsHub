@@ -76,6 +76,12 @@ function startTimer() {
     resetTimerValues();
   }
   if (totalSeconds <= 0) return;
+  if (window.trackEvent) {
+    window.trackEvent('timer_start', {
+      total_seconds: totalSeconds,
+      remaining_seconds: remainingSeconds,
+    });
+  }
   const now = Date.now();
   endTime = now + remainingSeconds * 1000;
   timerInterval = setInterval(() => {
@@ -96,12 +102,18 @@ function pauseTimer() {
     remainingSeconds = Math.max(0, Math.round(msLeft / 1000));
     clearInterval(timerInterval);
     timerInterval = null;
+    if (window.trackEvent) {
+      window.trackEvent('timer_pause', { remaining_seconds: remainingSeconds });
+    }
   }
 }
 
 function resetTimer() {
   pauseTimer();
   resetTimerValues();
+  if (window.trackEvent) {
+    window.trackEvent('timer_reset', { total_seconds: totalSeconds });
+  }
 }
 
 function applyPreset(minutes) {
@@ -113,6 +125,9 @@ function applyPreset(minutes) {
   minutesEl.value = mins;
   secondsEl.value = secs;
   resetTimer();
+  if (window.trackEvent) {
+    window.trackEvent('timer_preset', { preset_minutes: minutes });
+  }
 }
 
 function toggleFullscreen() {
@@ -173,4 +188,10 @@ document.getElementById('fullscreen-btn').addEventListener('click', toggleFullsc
 
 document.addEventListener('fullscreenchange', () => {
   document.body.classList.toggle('fullscreen-mode', Boolean(document.fullscreenElement));
+  if (window.trackEvent) {
+    window.trackEvent('fullscreen_toggle', {
+      tool: 'timer',
+      state: document.fullscreenElement ? 'enter' : 'exit',
+    });
+  }
 });

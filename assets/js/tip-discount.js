@@ -16,7 +16,7 @@ function money(value) {
   return `$${(Math.round(value * 100) / 100).toFixed(2)}`;
 }
 
-function calculateTip() {
+function calculateTip(source) {
   const bill = parseFloat(billInput.value) || 0;
   const tipPercent = parseFloat(tipPercentInput.value) || 0;
   const split = Math.max(1, parseInt(splitInput.value, 10) || 1);
@@ -27,9 +27,16 @@ function calculateTip() {
   tipAmountEl.textContent = money(tipAmount);
   tipTotalEl.textContent = money(total);
   tipPerPersonEl.textContent = money(perPerson);
+  if (source && window.trackEvent) {
+    window.trackEvent('tip_calculate', {
+      source,
+      tip_percent: tipPercent,
+      split_count: split,
+    });
+  }
 }
 
-function calculateDiscount() {
+function calculateDiscount(source) {
   const original = parseFloat(originalPriceInput.value) || 0;
   const discountPercent = parseFloat(discountPercentInput.value) || 0;
   const savings = original * (discountPercent / 100);
@@ -37,23 +44,29 @@ function calculateDiscount() {
 
   savingsEl.textContent = money(savings);
   finalPriceEl.textContent = money(finalPrice);
+  if (source && window.trackEvent) {
+    window.trackEvent('discount_calculate', {
+      source,
+      discount_percent: discountPercent,
+    });
+  }
 }
 
-calcTipBtn.addEventListener('click', calculateTip);
-calcDiscountBtn.addEventListener('click', calculateDiscount);
+calcTipBtn.addEventListener('click', () => calculateTip('button'));
+calcDiscountBtn.addEventListener('click', () => calculateDiscount('button'));
 
 document.querySelectorAll('.tip-preset').forEach(btn => {
   btn.addEventListener('click', () => {
     tipPercentInput.value = btn.dataset.tip;
-    calculateTip();
+    calculateTip('preset');
   });
 });
 
-billInput.addEventListener('input', calculateTip);
-tipPercentInput.addEventListener('input', calculateTip);
-splitInput.addEventListener('input', calculateTip);
-originalPriceInput.addEventListener('input', calculateDiscount);
-discountPercentInput.addEventListener('input', calculateDiscount);
+billInput.addEventListener('input', () => calculateTip());
+tipPercentInput.addEventListener('input', () => calculateTip());
+splitInput.addEventListener('input', () => calculateTip());
+originalPriceInput.addEventListener('input', () => calculateDiscount());
+discountPercentInput.addEventListener('input', () => calculateDiscount());
 
 calculateTip();
 calculateDiscount();

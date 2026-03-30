@@ -55,6 +55,13 @@ function startPomodoro() {
   if (remainingSeconds <= 0) {
     remainingSeconds = (currentMode === 'work' ? workMinutes : breakMinutes) * 60;
   }
+  if (window.trackEvent) {
+    window.trackEvent('pomodoro_start', {
+      mode: currentMode,
+      work_minutes: workMinutes,
+      break_minutes: breakMinutes,
+    });
+  }
   endTime = Date.now() + remainingSeconds * 1000;
   running = true;
   intervalId = setInterval(() => {
@@ -76,6 +83,12 @@ function pausePomodoro() {
   intervalId = null;
   running = false;
   updateDisplay();
+  if (window.trackEvent) {
+    window.trackEvent('pomodoro_pause', {
+      mode: currentMode,
+      remaining_seconds: remainingSeconds,
+    });
+  }
 }
 
 function resetPomodoro() {
@@ -87,6 +100,9 @@ function resetPomodoro() {
   remainingSeconds = workMinutes * 60;
   sessionCount = 0;
   updateDisplay();
+  if (window.trackEvent) {
+    window.trackEvent('pomodoro_reset');
+  }
 }
 
 function switchSession() {
@@ -97,6 +113,12 @@ function switchSession() {
     sessionCount += 1;
     currentMode = 'break';
     remainingSeconds = breakMinutes * 60;
+    if (window.trackEvent) {
+      window.trackEvent('pomodoro_session_complete', {
+        session_count: sessionCount,
+        work_minutes: workMinutes,
+      });
+    }
   } else {
     currentMode = 'work';
     remainingSeconds = workMinutes * 60;
@@ -110,6 +132,9 @@ function applyPreset(work, rest) {
   workInput.value = work;
   breakInput.value = rest;
   resetPomodoro();
+  if (window.trackEvent) {
+    window.trackEvent('pomodoro_preset', { work_minutes: work, break_minutes: rest });
+  }
 }
 
 function playBeep() {
@@ -179,4 +204,10 @@ fullscreenBtn.addEventListener('click', () => {
 
 document.addEventListener('fullscreenchange', () => {
   document.body.classList.toggle('fullscreen-mode', Boolean(document.fullscreenElement));
+  if (window.trackEvent) {
+    window.trackEvent('fullscreen_toggle', {
+      tool: 'pomodoro',
+      state: document.fullscreenElement ? 'enter' : 'exit',
+    });
+  }
 });

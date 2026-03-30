@@ -11,13 +11,16 @@ function toDate(value) {
   return value ? new Date(`${value}T00:00:00`) : null;
 }
 
-function calcDifference() {
+function calcDifference(source) {
   let start = toDate(startDateInput.value);
   let end = toDate(endDateInput.value);
   if (!start || !end || isNaN(start.getTime()) || isNaN(end.getTime())) {
     daysResult.textContent = '0';
     weeksResult.textContent = '0';
     monthsResult.textContent = '0';
+    if (source && window.trackEvent) {
+      window.trackEvent('date_diff_calculate', { source, valid: false });
+    }
     return;
   }
   if (end < start) {
@@ -29,6 +32,9 @@ function calcDifference() {
   daysResult.textContent = diffDays;
   weeksResult.textContent = (diffDays / 7).toFixed(2);
   monthsResult.textContent = (diffDays / 30).toFixed(2);
+  if (source && window.trackEvent) {
+    window.trackEvent('date_diff_calculate', { source, valid: true, inclusive: inclusiveToggle.checked });
+  }
 }
 
 function resetDiff() {
@@ -39,10 +45,15 @@ function resetDiff() {
   calcDifference();
 }
 
-calcDiffBtn.addEventListener('click', calcDifference);
-resetDiffBtn.addEventListener('click', resetDiff);
-startDateInput.addEventListener('change', calcDifference);
-endDateInput.addEventListener('change', calcDifference);
-inclusiveToggle.addEventListener('change', calcDifference);
+calcDiffBtn.addEventListener('click', () => calcDifference('button'));
+resetDiffBtn.addEventListener('click', () => {
+  resetDiff();
+  if (window.trackEvent) {
+    window.trackEvent('date_diff_reset');
+  }
+});
+startDateInput.addEventListener('change', () => calcDifference('input'));
+endDateInput.addEventListener('change', () => calcDifference('input'));
+inclusiveToggle.addEventListener('change', () => calcDifference('toggle'));
 
 resetDiff();

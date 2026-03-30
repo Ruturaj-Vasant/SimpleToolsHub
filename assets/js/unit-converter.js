@@ -133,8 +133,24 @@ categorySelect.addEventListener('change', () => {
   convert();
 });
 
-convertBtn.addEventListener('click', convert);
-swapBtn.addEventListener('click', swapUnits);
+convertBtn.addEventListener('click', () => {
+  convert();
+  if (window.trackEvent) {
+    window.trackEvent('unit_convert', {
+      category: categorySelect.value,
+      from_unit: fromUnitSelect.value,
+      to_unit: toUnitSelect.value,
+    });
+  }
+});
+swapBtn.addEventListener('click', () => {
+  const fromUnit = fromUnitSelect.value;
+  const toUnit = toUnitSelect.value;
+  swapUnits();
+  if (window.trackEvent) {
+    window.trackEvent('unit_swap', { from_unit: fromUnit, to_unit: toUnit });
+  }
+});
 fromValueInput.addEventListener('input', convert);
 fromUnitSelect.addEventListener('change', convert);
 toUnitSelect.addEventListener('change', convert);
@@ -144,6 +160,13 @@ async function copyConversion() {
   try {
     await navigator.clipboard.writeText(text);
     copyBtn.textContent = 'Copied!';
+    if (window.trackEvent) {
+      window.trackEvent('unit_copy_result', {
+        category: categorySelect.value,
+        from_unit: fromUnitSelect.value,
+        to_unit: toUnitSelect.value,
+      });
+    }
   } catch (err) {
     copyBtn.textContent = 'Copy not available';
   }

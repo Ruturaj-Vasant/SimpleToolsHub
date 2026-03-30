@@ -87,16 +87,39 @@ async function copyResults() {
   try {
     await navigator.clipboard.writeText(text);
     btn.textContent = 'Copied!';
+    if (window.trackEvent) {
+      window.trackEvent('percentage_copy_results');
+    }
   } catch (err) {
     btn.textContent = 'Copy not available';
   }
   setTimeout(() => (btn.textContent = 'Copy results'), 1400);
 }
 
-document.getElementById('calc-percent-of').addEventListener('click', recalcAll);
-document.getElementById('calc-what-percent').addEventListener('click', recalcAll);
-document.getElementById('calc-change').addEventListener('click', recalcAll);
-document.getElementById('calc-grade').addEventListener('click', recalcAll);
+document.getElementById('calc-percent-of').addEventListener('click', () => {
+  recalcAll();
+  if (window.trackEvent) {
+    window.trackEvent('percentage_calculate', { type: 'percent_of' });
+  }
+});
+document.getElementById('calc-what-percent').addEventListener('click', () => {
+  recalcAll();
+  if (window.trackEvent) {
+    window.trackEvent('percentage_calculate', { type: 'what_percent' });
+  }
+});
+document.getElementById('calc-change').addEventListener('click', () => {
+  recalcAll();
+  if (window.trackEvent) {
+    window.trackEvent('percentage_calculate', { type: 'percent_change' });
+  }
+});
+document.getElementById('calc-grade').addEventListener('click', () => {
+  recalcAll();
+  if (window.trackEvent) {
+    window.trackEvent('percentage_calculate', { type: 'grade' });
+  }
+});
 document.getElementById('copy-percent-results').addEventListener('click', copyResults);
 
 ['percent-of', 'percent-base', 'percent-part', 'percent-whole', 'percent-original', 'percent-new', 'grade-earned', 'grade-total'].forEach(id => {
