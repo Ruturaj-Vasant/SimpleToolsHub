@@ -26,8 +26,7 @@ function getPreferredTheme() {
   } catch (err) {
     // ignore
   }
-  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  return prefersDark ? 'dark' : 'light';
+  return 'light';
 }
 
 function initThemeToggle(startTheme) {
